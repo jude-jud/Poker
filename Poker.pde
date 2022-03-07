@@ -1,4 +1,4 @@
-enum Gamestates{
+ enum Gamestates{
   PASSCARD,
   THREECARD,
   FOURTHCARD,
@@ -34,10 +34,11 @@ void setup(){
   d = new Deck();
   d.shuffle();
   player = new Hand(427,700);
-  t = new GameTable(500,400);
+  t = new GameTable(317,400);
   
 }
 void draw(){
+  background(255);
   //d.showall();
   switch(currentstate){
     case PASSCARD:
@@ -49,12 +50,19 @@ void draw(){
       currentstate = Gamestates.BET;
       break;
     case THREECARD:
-    turnnumber = 1;
+      turnnumber = 1;
       t.placeCard3(d.passCard(),d.passCard(),d.passCard());
       currentstate = Gamestates.BET;
       break;
     case FOURTHCARD:
-      t.placeCard
+      turnnumber = 2;
+      t.placeCard4(d.passCard());
+      currentstate = Gamestates.BET;
+      break;
+    case FIFTHCARD:
+      turnnumber = 3;
+      t.placeCard5(d.passCard());
+      currentstate = Gamestates.BET;
       break;
     case BET:
       if(spacekey == true && turnnumber == 0){
@@ -63,6 +71,17 @@ void draw(){
       if(spacekey == true && turnnumber == 1){
         currentstate = Gamestates.FOURTHCARD;
       }
+      if(spacekey == true && turnnumber == 2){
+        currentstate = Gamestates.FIFTHCARD;
+      }
+      if(spacekey == true && turnnumber == 3){
+        currentstate = Gamestates.CHECKWIN;
+        player.combinecards(t.tablecards);
+        player.calcscore();
+      }
+      break;
+    case CHECKWIN:
+      turnnumber = 4;
       break;
   }
   player.showHand();

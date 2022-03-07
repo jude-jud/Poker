@@ -6,13 +6,13 @@ class Deck{
     cn = 0;
     cards = new Cards[52];
     for(int n = 0;n<13;n++){
-      cards[cn] = new Cards(n+2,"diamonds",cardsprites[cn]);
+      cards[cn] = new Cards(n+1,"diamonds",cardsprites[cn]);
       cn+=1;
-      cards[cn] = new Cards(n+2,"clubs",cardsprites[cn]);
+      cards[cn] = new Cards(n+1,"clubs",cardsprites[cn]);
       cn += 1;
-      cards[cn] = new Cards(n+2,"hearts",cardsprites[cn]);
+      cards[cn] = new Cards(n+1,"hearts",cardsprites[cn]);
       cn += 1;
-      cards[cn] = new Cards(n+2,"spades",cardsprites[cn]);
+      cards[cn] = new Cards(n+1,"spades",cardsprites[cn]);
       cn += 1;
     }
   }

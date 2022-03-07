@@ -22,9 +22,17 @@ class GameTable{
     tablecards[2] = card3;
   }
   public void placeCard4(Cards card4){
-    
+    card4.setXY(x + 219,y);
+    tablecards[3] = card4;
+  }
+  public void placeCard5(Cards card5){
+    card5.setXY(x + 292,y);
+    tablecards[4] = card5;
   }
   public void resetTable(){
     tablecards = new Cards[5];
+  }
+  public Cards[] getcards(){
+    return(tablecards);
   }
 }
