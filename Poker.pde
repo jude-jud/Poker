@@ -13,7 +13,9 @@ int turnnumber = 0;
 boolean spacekey =false;
 PImage[] cardsprites = new PImage[52];
 Deck d;
-Hand player;
+Hand player,p2,p3,p4;
+Input in;
+Button b;
 void setup(){
   size(1000,800);
   PImage diamonds = loadImage("diamonds-cards.jpg");
@@ -34,11 +36,16 @@ void setup(){
   d = new Deck();
   d.shuffle();
   player = new Hand(427,700);
-  t = new GameTable(317,400);
-  
+  t = new GameTable(317,327 );
+  p2 = new Hand(427,50);
+  p3 = new Hand(50,327);
+  p4 = new Hand(800,327);
+  in = new Input(600,700);
+  b = new Button();
 }
 void draw(){
   background(255);
+  
   //d.showall();
   switch(currentstate){
     case PASSCARD:
@@ -46,7 +53,16 @@ void draw(){
       d.shuffle();
       Cards c1 = d.passCard();
       Cards c2 = d.passCard();
+      Cards c3 = d.passCard();
+      Cards c4 = d.passCard();
+      Cards c5 = d.passCard();
+      Cards c6 = d.passCard();
+      Cards c7 = d.passCard();
+      Cards c8 = d.passCard();
       player.setCards(c1,c2);
+      p2.setCards(c3,c4);
+      p3.setCards(c5,c6);
+      p4.setCards(c7,c8);
       currentstate = Gamestates.BET;
       break;
     case THREECARD:
@@ -78,6 +94,12 @@ void draw(){
         currentstate = Gamestates.CHECKWIN;
         player.combinecards(t.tablecards);
         player.calcscore();
+        p2.combinecards(t.tablecards);
+        p2.calcscore();
+        p3.combinecards(t.tablecards);
+        p3.calcscore();
+        p4.combinecards(t.tablecards);
+        p4.calcscore();
       }
       break;
     case CHECKWIN:
@@ -85,12 +107,24 @@ void draw(){
       break;
   }
   player.showHand();
+  p2.showHand();
+  p3.showHand();
+  p4.showHand();
   t.ShowTable();
+  in.show();
+  b.show();
+  b.mouseover();
   spacekey = false;
 }
 void keyPressed(){
   if(keyCode == 32){
     spacekey = true;
+  }
+  if(keyCode <= 57 && keyCode >= 48){
+    in.addChar(key);
+  }
+  if(keyCode == 8){
+    in.delChar();
   }
 }
 //finish switch statement
