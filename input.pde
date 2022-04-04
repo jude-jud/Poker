@@ -35,4 +35,7 @@ class Input{
   public int getnum(){
     return(int(input));
   }
+  public void resetInput(){
+    input = "";
+  }
 }

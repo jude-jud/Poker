@@ -1,10 +1,13 @@
 class GameTable{
   Cards[] tablecards;
   float x,y;
+  int pot, curbet;
   public GameTable(float x,float y){
     this.x = x;
     this.y = y;
     tablecards = new Cards[5];
+    pot = 0;
+    curbet = 0;
   }
   public void ShowTable(){
     for(int i= 0;i<5;i++){
@@ -31,8 +34,30 @@ class GameTable{
   }
   public void resetTable(){
     tablecards = new Cards[5];
+    pot = 0;
+    curbet = 0;
   }
   public Cards[] getcards(){
     return(tablecards);
   }
+  public void changeBet(int curbet){
+    this.curbet = curbet;
+  }
+  public int getCurbet(){
+    return(curbet);
+  }
+  public int getPot(){
+    return(pot);
+  }
+  public void addPot(int money){
+    pot = pot+ money;
+  }
 }
+
+//1) In the showTable function, also draw the currentBet on the screen
+//2) create a money variable in the hand class
+//3) in the constructor set the money variable to be 1000
+//4) in the showHands function draw out the money variable on the screen
+//5) write a function called giveMoney with a number parameter.
+//-subtract from how much money the hand has based on the money parameter
+//-also return the money parameter

@@ -17,18 +17,26 @@ class Button{
     label = l;
   }
   public void show(){
+    fill(200);
     rect(x,y,w,h);
-    text(label,x/2-w,y/2-h);
+    fill(255);
+    textAlign(CENTER,CENTER);
+    text(label,x+w/2,y+h/2);
   }
   public boolean mouseover(){
     if((mouseX > x && mouseX < x + w)&&(mouseY > y && mouseY < y + h)){
-      System.out.println("mousevoer");
+      //System.out.println("mousevoer");
       return(true);
     }
     
     return(false);
   }
-  
+  public boolean mouseClick(){
+    if(justClicked == true && mouseover() == true){
+      return(true);
+    }
+    return(false);
+  }
 }
 //Homework:
 //write a show function that will show the rectangular button and the label on top of the button

@@ -10,12 +10,13 @@
 Gamestates currentstate = Gamestates.PASSCARD;
 GameTable t;
 int turnnumber = 0;
-boolean spacekey =false;
+boolean spacekey = false;
+boolean justClicked = false;
 PImage[] cardsprites = new PImage[52];
 Deck d;
 Hand player,p2,p3,p4;
 Input in;
-Button b;
+Button b,check;
 void setup(){
   size(1000,800);
   PImage diamonds = loadImage("diamonds-cards.jpg");
@@ -41,7 +42,8 @@ void setup(){
   p3 = new Hand(50,327);
   p4 = new Hand(800,327);
   in = new Input(600,700);
-  b = new Button();
+  b = new Button(700,700,"BET");
+  check = new Button(800,700,"CHECK");
 }
 void draw(){
   background(255);
@@ -81,16 +83,19 @@ void draw(){
       currentstate = Gamestates.BET;
       break;
     case BET:
-      if(spacekey == true && turnnumber == 0){
+      if(b.mouseClick() == true){
+        t.changeBet(in.getnum());
+      }
+      if(check.mouseClick() == true && turnnumber == 0){
         currentstate = Gamestates.THREECARD;
       }
-      if(spacekey == true && turnnumber == 1){
+      if(check.mouseClick() == true && turnnumber == 1){
         currentstate = Gamestates.FOURTHCARD;
       }
-      if(spacekey == true && turnnumber == 2){
+      if(check.mouseClick()  == true && turnnumber == 2){
         currentstate = Gamestates.FIFTHCARD;
       }
-      if(spacekey == true && turnnumber == 3){
+      if(check.mouseClick()  == true && turnnumber == 3){
         currentstate = Gamestates.CHECKWIN;
         player.combinecards(t.tablecards);
         player.calcscore();
@@ -113,8 +118,9 @@ void draw(){
   t.ShowTable();
   in.show();
   b.show();
-  b.mouseover();
+  check.show();
   spacekey = false;
+  justClicked = false;
 }
 void keyPressed(){
   if(keyCode == 32){
@@ -126,5 +132,8 @@ void keyPressed(){
   if(keyCode == 8){
     in.delChar();
   }
+}
+void mouseClicked(){
+  justClicked = true; 
 }
 //finish switch statement
