@@ -15,6 +15,8 @@ class GameTable{
         tablecards[i].show();
       }
     }
+    text("$"+curbet,x,y-50);
+    text("$"+pot,x+100,y-50);
   }
   public void placeCard3(Cards card1,Cards card2,Cards card3){
     card1.setXY(x,y);

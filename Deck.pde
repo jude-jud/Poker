@@ -31,6 +31,7 @@ class Deck{
     return(cards[topcard]);
   }
   public void shuffle(){
+    topcard = 0;
     for(int i = 0;i<52;i++){
       int r = int(random(0,52));
       Cards temp = cards[i];

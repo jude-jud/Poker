@@ -3,10 +3,14 @@
   Cards card1,card2;
   float x,y;
   int score;
+  int money; 
+  PImage back = loadImage("blueback.jpg");
   public Hand(float x,float y){
     this.x = x;
     this.y = y;
     score = 0;
+    money = 1000;
+    
   }
   public void setCards(Cards card1,Cards card2){
     this.card1 = card1;
@@ -19,6 +23,7 @@
     card2.show();
     fill(0);
     text(score,x,y-10);
+    text("$"+money,x+175,y+70);
   }
   public void combinecards(Cards[] cs){
     combined = new Cards[7];
@@ -30,6 +35,23 @@
     combined[5] = card1;
     combined[6] = card2;
     sortarray();
+  }
+  public void hideHand(){
+    image(back,x,y,73,96);
+    image(back,x+73,y,73,96);
+    fill(0);
+    text(score,x,y-10);
+    text("$"+money,x+175,y+70);
+  }
+  public int giveMoney(int mon){
+    money = money-mon;
+    return(mon);
+  }
+  public void addMoney(int mon){
+    money+=mon;
+  }
+  public int getscore(){
+    return(score);
   }
   public void sortarray(){
     Cards temp;

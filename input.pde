@@ -21,7 +21,7 @@ class Input{
     rect(x,y,w,h);
     fill(0);
     textSize(20);
-    text(input,x,y+30);
+    text(input,x+50,y+25);
     
   }
   public void addChar(char n){

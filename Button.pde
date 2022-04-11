@@ -1,4 +1,4 @@
-class Button{
+ class Button{
   float x,y,w,h;
   String label;
   
@@ -38,8 +38,3 @@ class Button{
     return(false);
   }
 }
-//Homework:
-//write a show function that will show the rectangular button and the label on top of the button
-//write another function called mouseover that will return a Boolean indicating whether or not your mouse is over the rectangular button
-//then create a button object in the main file
-//in the draw function activate the mouseover function of the button object and print the result

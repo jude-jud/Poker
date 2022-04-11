@@ -86,41 +86,68 @@ void draw(){
       if(b.mouseClick() == true){
         t.changeBet(in.getnum());
       }
-      if(check.mouseClick() == true && turnnumber == 0){
-        currentstate = Gamestates.THREECARD;
-      }
-      if(check.mouseClick() == true && turnnumber == 1){
-        currentstate = Gamestates.FOURTHCARD;
-      }
-      if(check.mouseClick()  == true && turnnumber == 2){
-        currentstate = Gamestates.FIFTHCARD;
-      }
-      if(check.mouseClick()  == true && turnnumber == 3){
-        currentstate = Gamestates.CHECKWIN;
-        player.combinecards(t.tablecards);
-        player.calcscore();
-        p2.combinecards(t.tablecards);
-        p2.calcscore();
-        p3.combinecards(t.tablecards);
-        p3.calcscore();
-        p4.combinecards(t.tablecards);
-        p4.calcscore();
+      if(check.mouseClick() == true){
+        collectMoney();
+        if(turnnumber == 0){
+          currentstate = Gamestates.THREECARD;
+        }
+        if(turnnumber == 1){
+          currentstate = Gamestates.FOURTHCARD;
+        }
+        if(turnnumber == 2){
+          currentstate = Gamestates.FIFTHCARD;
+        }
+        if(turnnumber == 3){
+          currentstate = Gamestates.CHECKWIN;
+          player.combinecards(t.tablecards);
+          player.calcscore();
+          p2.combinecards(t.tablecards);
+          p2.calcscore();
+          p3.combinecards(t.tablecards);
+          p3.calcscore();
+          p4.combinecards(t.tablecards);
+          p4.calcscore();
+          if(player.getscore() > p2.getscore() && player.getscore() > p3.getscore() && player.getscore() > p4.getscore()){
+            player.addMoney(t.getPot());
+          }
+          if(p2.getscore() > player.getscore() && p2.getscore() > p3.getscore() && p2.getscore() > p4.getscore()){
+            p2.addMoney(t.getPot());
+          }
+          if(p3.getscore() > p2.getscore() && p3.getscore() > player.getscore() && p3.getscore() > p4.getscore()){
+            p3.addMoney(t.getPot());
+          }
+          if(p4.getscore() > player.getscore() && p4.getscore() > p2.getscore() && p4.getscore() > p3.getscore()){
+            p4.addMoney(t.getPot());
+          }
+        }
       }
       break;
     case CHECKWIN:
       turnnumber = 4;
+      if(check.mouseClick()){
+        t.resetTable();
+        currentstate = Gamestates.PASSCARD;
+      }
       break;
   }
   player.showHand();
-  p2.showHand();
-  p3.showHand();
-  p4.showHand();
+  p2.hideHand();
+  p3.hideHand();
+  p4.hideHand();
   t.ShowTable();
   in.show();
   b.show();
   check.show();
   spacekey = false;
   justClicked = false;
+}
+void collectMoney(){
+  int bet = t.getCurbet();
+  t.addPot(player.giveMoney(bet));
+  t.addPot(p2.giveMoney(bet));
+  t.addPot(p3.giveMoney(bet));
+  t.addPot(p4.giveMoney(bet));
+  t.changeBet(0);
 }
 void keyPressed(){
   if(keyCode == 32){
@@ -136,4 +163,3 @@ void keyPressed(){
 void mouseClicked(){
   justClicked = true; 
 }
-//finish switch statement
